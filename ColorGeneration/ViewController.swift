@@ -21,12 +21,27 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        setupSlider()
     }
 
     @IBAction func sliderRedAction() {
         redValueText.text = sliderRedOutlet.value.formatted()
     }
-
+    @IBAction func sliderGreenAction() {
+        greenValueText.text = sliderGreenOutlet.value.formatted()
+    }
+    @IBAction func sliderBlueAction() {
+        blueValueText.text = sliderBlueOutlet.value.formatted()
+    }
+    
+    private func setupSlider(){
+        sliderRedOutlet.minimumValue = 0
+        sliderRedOutlet.maximumValue = 1
+        sliderGreenOutlet.minimumValue = 0
+        sliderGreenOutlet.maximumValue = 1
+        sliderBlueOutlet.minimumValue = 0
+        sliderBlueOutlet.maximumValue = 1
+    }
+    
 }
 
