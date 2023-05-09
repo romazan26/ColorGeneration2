@@ -26,21 +26,37 @@ final class ViewController: UIViewController {
 
     @IBAction func sliderRedAction() {
         redValueText.text = sliderRedOutlet.value.formatted()
+        colorMix()
     }
     @IBAction func sliderGreenAction() {
         greenValueText.text = sliderGreenOutlet.value.formatted()
+        colorMix()
     }
     @IBAction func sliderBlueAction() {
         blueValueText.text = sliderBlueOutlet.value.formatted()
+        colorMix()
     }
     
     private func setupSlider(){
         sliderRedOutlet.minimumValue = 0
         sliderRedOutlet.maximumValue = 1
+        sliderRedOutlet.minimumTrackTintColor = .red
+        
         sliderGreenOutlet.minimumValue = 0
         sliderGreenOutlet.maximumValue = 1
+        sliderGreenOutlet.minimumTrackTintColor = .green
+        
         sliderBlueOutlet.minimumValue = 0
         sliderBlueOutlet.maximumValue = 1
+        sliderBlueOutlet.minimumTrackTintColor = .blue
+    }
+    
+    private func colorMix(){
+        colorView.backgroundColor = UIColor(
+            red: CGFloat(sliderRedOutlet.value),
+            green: CGFloat(sliderGreenOutlet.value),
+            blue: CGFloat(sliderBlueOutlet.value),
+            alpha: 1)
     }
     
 }
