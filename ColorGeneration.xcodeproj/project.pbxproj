@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		306B5FA72A1A7979008219EC /* WelcomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306B5FA62A1A7979008219EC /* WelcomViewController.swift */; };
 		30B2C36D2A00394200708F37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2C36C2A00394200708F37 /* AppDelegate.swift */; };
 		30B2C36F2A00394200708F37 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2C36E2A00394200708F37 /* SceneDelegate.swift */; };
 		30B2C3712A00394200708F37 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B2C3702A00394200708F37 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		306B5FA62A1A7979008219EC /* WelcomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomViewController.swift; sourceTree = "<group>"; };
 		30B2C3692A00394200708F37 /* ColorGeneration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorGeneration.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30B2C36C2A00394200708F37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30B2C36E2A00394200708F37 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +39,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		306B5FA82A1A7990008219EC /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				306B5FA62A1A7979008219EC /* WelcomViewController.swift */,
+				30B2C3702A00394200708F37 /* ViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		306B5FA92A1A79A7008219EC /* App */ = {
+			isa = PBXGroup;
+			children = (
+				30B2C37A2A00394300708F37 /* Info.plist */,
+				30B2C36C2A00394200708F37 /* AppDelegate.swift */,
+				30B2C36E2A00394200708F37 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		306B5FAA2A1A79D3008219EC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				30B2C3752A00394300708F37 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		306B5FAB2A1A7A1B008219EC /* StoryBoards */ = {
+			isa = PBXGroup;
+			children = (
+				30B2C3722A00394200708F37 /* Main.storyboard */,
+				30B2C3772A00394300708F37 /* LaunchScreen.storyboard */,
+			);
+			path = StoryBoards;
+			sourceTree = "<group>";
+		};
 		30B2C3602A00394200708F37 = {
 			isa = PBXGroup;
 			children = (
@@ -56,13 +94,10 @@
 		30B2C36B2A00394200708F37 /* ColorGeneration */ = {
 			isa = PBXGroup;
 			children = (
-				30B2C36C2A00394200708F37 /* AppDelegate.swift */,
-				30B2C36E2A00394200708F37 /* SceneDelegate.swift */,
-				30B2C3702A00394200708F37 /* ViewController.swift */,
-				30B2C3722A00394200708F37 /* Main.storyboard */,
-				30B2C3752A00394300708F37 /* Assets.xcassets */,
-				30B2C3772A00394300708F37 /* LaunchScreen.storyboard */,
-				30B2C37A2A00394300708F37 /* Info.plist */,
+				306B5FAB2A1A7A1B008219EC /* StoryBoards */,
+				306B5FAA2A1A79D3008219EC /* Resources */,
+				306B5FA92A1A79A7008219EC /* App */,
+				306B5FA82A1A7990008219EC /* ViewControllers */,
 			);
 			path = ColorGeneration;
 			sourceTree = "<group>";
@@ -141,6 +176,7 @@
 				30B2C3712A00394200708F37 /* ViewController.swift in Sources */,
 				30B2C36D2A00394200708F37 /* AppDelegate.swift in Sources */,
 				30B2C36F2A00394200708F37 /* SceneDelegate.swift in Sources */,
+				306B5FA72A1A7979008219EC /* WelcomViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,7 +325,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AR6AN34RS9;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ColorGeneration/Info.plist;
+				INFOPLIST_FILE = ColorGeneration/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -320,7 +356,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AR6AN34RS9;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ColorGeneration/Info.plist;
+				INFOPLIST_FILE = ColorGeneration/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
