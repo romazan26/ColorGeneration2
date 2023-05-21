@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol SettingViewControllerDelegate: AnyObject {
+    func setNewColor(_ newColor: UIColor)
+}
+
 class WelcomViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -15,6 +19,18 @@ class WelcomViewController: UIViewController {
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let settingVC = segue.destination as? SettingViewController else {return}
+        settingVC.colorWelcom = view.backgroundColor
+        settingVC.delegate = self
+    }
 
-
+}
+// MARK: - SettingViewControllerDelegate
+extension WelcomViewController: SettingViewControllerDelegate {
+    func setNewColor(_ newColor: UIColor) {
+        view.backgroundColor = newColor
+    }
+    
+    
 }

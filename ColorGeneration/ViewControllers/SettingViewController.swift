@@ -7,8 +7,14 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
-
+final class SettingViewController: UIViewController {
+    
+    var colorWelcom: UIColor!
+    
+    private var newColor: UIColor!
+    
+    unowned var delegate: SettingViewControllerDelegate!
+    
     @IBOutlet var colorView: UIView!
     
     @IBOutlet var blueValueText: UITextField!
@@ -21,10 +27,12 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        colorMix()
+       // colorMix()
         settingStart()
         
     }
+    
+
 
     @IBAction func sliderAction(_ sender: UISlider) {
         colorMix()
@@ -39,23 +47,35 @@ final class ViewController: UIViewController {
         }
     }
     
+    @IBAction func doneBuutonPress() {
+        delegate.setNewColor(newColor)
+        dismiss(animated: true)
+    }
     
     private func colorMix(){
-        colorView.backgroundColor = UIColor(
+        newColor = UIColor(
             red: CGFloat(sliderRedOutlet.value),
             green: CGFloat(sliderGreenOutlet.value),
             blue: CGFloat(sliderBlueOutlet.value),
             alpha: 1)
+        colorView.backgroundColor = newColor
     }
     
     private func settingStart() {
         colorView.layer.cornerRadius = 10
+        colorView.backgroundColor = colorWelcom
         
-        redValueText.text = String(format: "%.2f", sliderRedOutlet.value)
-        greenValueText.text = String(format: "%.2f", sliderGreenOutlet.value)
-        blueValueText.text = String(format: "%.2f", sliderBlueOutlet.value)
-    }
+        
+        
+        
+//        redValueText.text = String(format: "%.2f", sliderRedOutlet.value)
+//        greenValueText.text = String(format: "%.2f", sliderGreenOutlet.value)
+//        blueValueText.text = String(format: "%.2f", sliderBlueOutlet.value)
+   }
     
     
 }
 
+extension SettingViewController: UITextFieldDelegate {
+    
+}
