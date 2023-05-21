@@ -21,11 +21,8 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        colorView.layer.cornerRadius = 10
         colorMix()
-        redValueText.text = String(format: "%.2f", sliderRedOutlet.value)
-        greenValueText.text = String(format: "%.2f", sliderGreenOutlet.value)
-        blueValueText.text = String(format: "%.2f", sliderBlueOutlet.value)
+        settingStart()
         
     }
 
@@ -49,6 +46,14 @@ final class ViewController: UIViewController {
             green: CGFloat(sliderGreenOutlet.value),
             blue: CGFloat(sliderBlueOutlet.value),
             alpha: 1)
+    }
+    
+    private func settingStart() {
+        colorView.layer.cornerRadius = 10
+        
+        redValueText.text = String(format: "%.2f", sliderRedOutlet.value)
+        greenValueText.text = String(format: "%.2f", sliderGreenOutlet.value)
+        blueValueText.text = String(format: "%.2f", sliderBlueOutlet.value)
     }
     
     
