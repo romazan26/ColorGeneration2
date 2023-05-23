@@ -11,13 +11,7 @@ protocol SettingViewControllerDelegate: AnyObject {
     func setNewColor(_ newColor: UIColor)
 }
 
-class WelcomViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        
-    }
+final class WelcomViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let settingVC = segue.destination as? SettingViewController else {return}

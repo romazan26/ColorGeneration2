@@ -152,7 +152,6 @@
                                 <state key="normal" title="Done"/>
                                 <connections>
                                     <action selector="doneBuutonPress" destination="BYZ-38-t0r" eventType="touchUpInside" id="Upt-bI-ULn"/>
-                                    <segue destination="xu8-Gd-C06" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="QL7-oA-4ms"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -207,9 +206,6 @@
             <point key="canvasLocation" x="-863.35877862595419" y="19.718309859154932"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="QL7-oA-4ms"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="square.and.pencil" catalog="system" width="128" height="113"/>
         <systemColor name="linkColor">

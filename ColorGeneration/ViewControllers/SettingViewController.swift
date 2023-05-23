@@ -14,7 +14,7 @@ final class SettingViewController: UIViewController {
     private var newColor: UIColor!
     
     unowned var delegate: SettingViewControllerDelegate!
-    
+// MARK: - IBOutlets
     @IBOutlet var colorView: UIView!
     
     @IBOutlet var blueValueText: UITextField!
@@ -61,6 +61,12 @@ final class SettingViewController: UIViewController {
         dismiss(animated: true)
     }
     
+   
+    
+    
+}
+extension SettingViewController {
+    
     private func colorMix(){
         newColor = UIColor(
             red: CGFloat(sliderRedOutlet.value),
@@ -70,16 +76,28 @@ final class SettingViewController: UIViewController {
         colorView.backgroundColor = newColor
     }
     
+    private func setValue(for labels: UILabel...) {
+        labels.forEach { label in
+            switch label {
+            case redValueText: label.text = string(from: sliderRedOutlet)
+            case greenValueText: label.text = string(from: sliderGreenOutlet)
+            default: blueValueText.text = string(from: sliderBlueOutlet)
+            }
+        }
+    }
+    
     private func settingStart() {
         colorView.layer.cornerRadius = 10
         colorView.backgroundColor = colorWelcom
-        
-        
+                
    }
     
+    private func string(from slider: UISlider) -> String {
+        String(format: "%.2f", slider.value)
+    }
     
 }
-
+// MARK - UITextFieldDelegate
 extension SettingViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         
