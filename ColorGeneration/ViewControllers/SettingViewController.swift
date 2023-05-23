@@ -11,8 +11,6 @@ final class SettingViewController: UIViewController {
     
     var colorWelcom: UIColor!
     
-    private var newColor: UIColor!
-    
     unowned var delegate: SettingViewControllerDelegate!
 // MARK: - IBOutlets
     @IBOutlet var colorView: UIView!
@@ -29,6 +27,8 @@ final class SettingViewController: UIViewController {
     @IBOutlet var greenTF: UITextField!
     @IBOutlet var redTF: UITextField!
     
+    // MARK: - overrideFunctions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         settingStart()
@@ -36,17 +36,25 @@ final class SettingViewController: UIViewController {
         redTF.delegate = self
         blueTF.delegate = self
         greenTF.delegate = self
+        
+        setValue(for: sliderRedOutlet, sliderBlueOutlet, sliderGreenOutlet)
+        setValue(fo: redTF, blueTF, greenTF)
+        setValue(fo: blueValueText, greenValueText, redValueText)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
 
-
+// MARK: - IBActions
     @IBAction func sliderAction(_ sender: UISlider) {
         colorMix()
         
         switch sender {
         case sliderRedOutlet:
-            redValueText.text = String(format: "%.2f", sliderRedOutlet.value)
-            redTF.text = String(format: "%.2f", sliderRedOutlet.value)
+            setValue(fo: redValueText)
+            setValue(fo: redTF)
         case sliderGreenOutlet:
             greenValueText.text = String(format: "%.2f", sliderGreenOutlet.value)
             greenTF.text = String(format: "%.2f", sliderGreenOutlet.value)
@@ -57,7 +65,7 @@ final class SettingViewController: UIViewController {
     }
     
     @IBAction func doneBuutonPress() {
-        delegate.setNewColor(newColor)
+        delegate.setNewColor(colorView.backgroundColor ?? .white)
         dismiss(animated: true)
     }
     
@@ -65,15 +73,15 @@ final class SettingViewController: UIViewController {
     
     
 }
+// MARK: - Private functions
 extension SettingViewController {
     
     private func colorMix(){
-        newColor = UIColor(
+        colorView.backgroundColor = UIColor(
             red: CGFloat(sliderRedOutlet.value),
             green: CGFloat(sliderGreenOutlet.value),
             blue: CGFloat(sliderBlueOutlet.value),
             alpha: 1)
-        colorView.backgroundColor = newColor
     }
     
     private func setValue(for labels: UILabel...) {
@@ -82,6 +90,28 @@ extension SettingViewController {
             case redValueText: label.text = string(from: sliderRedOutlet)
             case greenValueText: label.text = string(from: sliderGreenOutlet)
             default: blueValueText.text = string(from: sliderBlueOutlet)
+            }
+        }
+    }
+    
+    private func setValue(fo textFields: UITextField...) {
+        textFields.forEach { textField in
+            switch textField {
+            case redTF: textField.text = string(from: sliderRedOutlet)
+            case blueTF: textField.text = string(from: sliderBlueOutlet)
+            default: textField.text = string(from: sliderGreenOutlet)
+            }
+            
+        }
+    }
+    
+    private func setValue(for colorSliders: UISlider...) {
+        let ciColor = CIColor(color: colorWelcom)
+        colorSliders.forEach { slider in
+            switch slider {
+            case sliderRedOutlet: sliderRedOutlet.value = Float(ciColor.red)
+            case sliderGreenOutlet: sliderGreenOutlet.value = Float(ciColor.green)
+            default: sliderBlueOutlet.value = Float(ciColor.blue)
             }
         }
     }
@@ -96,17 +126,66 @@ extension SettingViewController {
         String(format: "%.2f", slider.value)
     }
     
+    private func showAlert(title: String, message: String, textField: UITextField? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) {_ in
+            textField?.text = "1.00"
+            textField?.becomeFirstResponder()
+        }
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
+    
 }
 // MARK - UITextFieldDelegate
 extension SettingViewController: UITextFieldDelegate {
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let text = textField.text else {
+            showAlert(title: "Wrong format!", message: "Please enter correct value")
+            return
+        }
+        guard let currentValue = Float(text), (0...1).contains(currentValue) else {
+            showAlert(
+                title: "Wrong format!",
+                message: "Please enter correct value",
+                textField: textField
+            )
+            return
+        }
         
-        blueValueText.text = blueTF.text
-        redValueText.text = redTF.text
-        greenValueText.text = greenTF.text
+        switch textField {
+        case redTF:
+            sliderRedOutlet.setValue(currentValue, animated: true)
+            setValue(fo: redValueText)
+        case greenTF:
+            sliderGreenOutlet.setValue(currentValue, animated: true)
+            setValue(fo: greenValueText)
+        default:
+            sliderBlueOutlet.setValue(currentValue, animated: true)
+            setValue(fo: blueValueText)
+        }
         
-        sliderRedOutlet.value = Float(redTF.text ?? "") ?? 1
-        sliderBlueOutlet.value = Float(blueTF.text ?? "") ?? 1
-        sliderGreenOutlet.value = Float(greenTF.text ?? "") ?? 1
+        colorMix()
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let keyboardToolbar = UIToolbar()
+        keyboardToolbar.sizeToFit()
+        textField.inputAccessoryView = keyboardToolbar
+        
+        let doneButton = UIBarButtonItem(
+            barButtonSystemItem: .done,
+            target: textField,
+            action: #selector(resignFirstResponder)
+        )
+        
+        let flexBarButton = UIBarButtonItem(
+            barButtonSystemItem: .flexibleSpace,
+            target: nil,
+            action: nil
+        )
+        
+        keyboardToolbar.items = [flexBarButton, doneButton]
     }
 }
